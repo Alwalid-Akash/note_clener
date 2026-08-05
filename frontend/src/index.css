@@ -1,0 +1,39 @@
+body {
+
+  font-family: Arial;
+
+  padding: 30px;
+
+}
+
+
+input,
+textarea {
+
+  display: block;
+
+  width: 300px;
+
+  margin: 10px;
+
+  padding: 10px;
+
+}
+
+
+button {
+
+  padding: 10px;
+
+  margin: 10px;
+
+  cursor: pointer;
+
+}
+
+
+div {
+
+  margin-bottom: 20px;
+
+}

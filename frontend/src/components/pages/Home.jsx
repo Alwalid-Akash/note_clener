@@ -1,10 +1,7 @@
-import NoteForm from "../components/NoteForm";
-import NoteCard from "../components/NoteCard";
+import NoteForm from "../form/NoteForm";
+import NoteCard from "../notecard/NoteCard";
 
-import {
-  useNotes
-}
-  from "../context/NoteContext";
+import { useNotes } from "../context/NoteContext";
 
 
 
