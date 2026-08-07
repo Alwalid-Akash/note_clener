@@ -1,82 +1,63 @@
 import { useState } from "react";
-
 import { useNotes } from "../context/NoteContext";
 
-
 function NoteForm() {
-
   const { createNote } = useNotes();
 
   const [form, setForm] = useState({
-
     title: "",
-    description: ""
-
+    description: "",
   });
 
-  const handleSubmit = async (e) => {
-
-
+  const submit = (e) => {
     e.preventDefault();
-
-
-    await createNote(form);
-
+    createNote(form);
     setForm({
-
       title: "",
-      description: ""
-
+      description: "",
     });
-
   };
 
-
   return (
+    <div className="card shadow mb-4">
+      <div className="card-body">
+        <h5>
+          <i className="bi bi-plus-circle"></i>
+          Add New Note
+        </h5>
+        <form onSubmit={submit}>
+          <input
+            className="form-control mb-3"
+            placeholder="Note title"
+            value={form.title}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                title: e.target.value,
+              })
+            }
+          />
 
-    <form onSubmit={handleSubmit}>
+          <textarea
+            className="form-control mb-3"
+            rows="4"
+            placeholder="Description"
+            value={form.description}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                description: e.target.value,
+              })
+            }
+          />
 
-      <input
-
-        placeholder="Title"
-
-        value={form.title}
-
-        onChange={
-          e =>
-            setForm({
-              ...form,
-              title: e.target.value
-            })
-        }
-
-      />
-
-
-      <textarea
-
-        placeholder="Description"
-
-        value={form.description}
-
-        onChange={
-          e =>
-            setForm({
-              ...form,
-              description: e.target.value
-            })
-        }
-
-      />
-
-      <button>
-        Add Note
-      </button>
-
-    </form>
-
-  )
+          <button className="btn btn-primary w-100">
+            Add Note
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
-
 
 export default NoteForm;

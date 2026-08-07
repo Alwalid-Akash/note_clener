@@ -1,8 +1,20 @@
 body {
 
-  font-family: Arial;
+  background: #f8f9fa;
 
-  padding: 30px;
+}
+
+
+.card {
+
+  border-radius: 15px;
+
+}
+
+
+button {
+
+  border-radius: 10px !important;
 
 }
 
@@ -10,30 +22,6 @@ body {
 input,
 textarea {
 
-  display: block;
-
-  width: 300px;
-
-  margin: 10px;
-
-  padding: 10px;
-
-}
-
-
-button {
-
-  padding: 10px;
-
-  margin: 10px;
-
-  cursor: pointer;
-
-}
-
-
-div {
-
-  margin-bottom: 20px;
+  border-radius: 10px !important;
 
 }
