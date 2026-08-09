@@ -7,7 +7,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const noteRoutes = require("./routes/noteRoutes");
 
-const errorHandler = require("./middleware/errorMiddleware.js");
+//const errorHandler = require("./middleware/errorMiddleware.js");
 
 
 const app = express();
@@ -37,7 +37,6 @@ app.use("/api/notes", noteRoutes);
 
 
 // Error middleware
-app.use(errorHandler);
 
 
 
