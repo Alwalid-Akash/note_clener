@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import { NoteProvider } from "./components/context/NoteContext.jsx"
-import { AuthProvider } from "./components/context/AuthContext";
+import { AuthProvider } from "./components/context/AuthContext.jsx";
 
 
 ReactDOM.createRoot(
