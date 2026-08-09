@@ -1,94 +1,104 @@
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useState
+} from "react";
+
 import api from "../../api/api.js";
+
 
 const AuthContext = createContext();
 
-export function AuthProvider({ children }) {
+
+export const AuthProvider = ({ children }) => {
+
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
   );
 
 
+  // LOGIN
+  const login = async (data) => {
+
+    const res = await api.post(
+      "/auth/login",
+      data
+    );
+
+    localStorage.setItem(
+      "token",
+      res.data.token
+    );
+
+    localStorage.setItem(
+      "user",
+      JSON.stringify(res.data.user)
+    );
+
+    setUser(res.data.user);
+
+  };
 
 
-
+  // REGISTER
   const register = async (data) => {
 
-    try {
+    const res = await api.post(
+      "/auth/register",
+      data
+    );
 
-      console.log("Register data:", data);
+    localStorage.setItem(
+      "token",
+      res.data.token
+    );
 
+    localStorage.setItem(
+      "user",
+      JSON.stringify(res.data.user)
+    );
 
-      const res = await api.post(
-        "/auth/register",
-        data
-      );
-
-
-      console.log("Register response:", res.data);
-
-
-      localStorage.setItem(
-        "token",
-        res.data.token
-      );
-
-
-      localStorage.setItem(
-        "user",
-        JSON.stringify(res.data.user)
-      );
-
-
-      setUser(res.data.user);
-
-
-      return res.data;
-
-
-    } catch (error) {
-
-
-      console.log(
-        "Register failed:",
-        error.response?.data || error.message
-      );
-
-
-      throw error;
-
-
-    }
-
-  };
-
-
-
-  const login = async (data) => {
-    const res = await api.post("/auth/login", data);
-    localStorage.setItem("token", res.data.token);
-    localStorage.setItem("user", JSON.stringify(res.data.user));
     setUser(res.data.user);
+
   };
 
+
+  // LOGOUT
   const logout = () => {
+
     localStorage.removeItem("token");
+
     localStorage.removeItem("user");
+
     setUser(null);
+
+    window.location.href = "/login";
+
   };
+
 
   return (
+
     <AuthContext.Provider
       value={{
         user,
-        register,
         login,
-        logout,
+        register,
+        logout
       }}
     >
-      {children}
-    </AuthContext.Provider>
-  );
-}
 
-export const useAuth = () => useContext(AuthContext);
+      {children}
+
+    </AuthContext.Provider>
+
+  );
+
+};
+
+
+export const useAuth = () => {
+
+  return useContext(AuthContext);
+
+};
