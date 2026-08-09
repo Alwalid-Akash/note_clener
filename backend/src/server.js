@@ -14,12 +14,13 @@ const app = express();
 
 
 // CORS
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true
-  })
-);
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://note-clener-3xa6.vercel.app"   // ← HERE (already present)
+  ],
+  credentials: true
+}));
 
 
 app.use(express.json());
