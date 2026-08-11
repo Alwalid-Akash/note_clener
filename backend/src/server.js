@@ -16,8 +16,8 @@ const app = express();
 // CORS
 app.use(cors({
   origin: [
-    //"http://localhost:5173",
-    "https://note-clener.vercel.app/"   // ← HERE (already present)
+    "http://localhost:5173",
+    "https://note-clener.vercel.app"   // ✅ no trailing slash
   ],
   credentials: true
 }));
