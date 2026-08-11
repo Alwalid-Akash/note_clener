@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5002/api"   // ← assuming your backend runs on port 5000
+  baseURL: "https://note-clener-1.onrender.com/api"   // ← assuming your backend runs on port 5000
 });
 // Attach JWT automatically
 api.interceptors.request.use((config) => {
