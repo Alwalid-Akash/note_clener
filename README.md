@@ -692,8 +692,6 @@ Deployment
 
 **Md Al Walid**
 
-Master's Student in Web Engineering
-Germany
 
 GitHub:
 https://github.com/Alwalid-Akash
