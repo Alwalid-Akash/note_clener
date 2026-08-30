@@ -79,6 +79,16 @@ function Login() {
                   required
                 />
 
+                {/* Forgot Password Link */}
+                <div className="text-end mb-3">
+                  <Link
+                    to="/forgot-password"
+                    className="text-decoration-none text-primary"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
+
                 <button
                   type="submit"
                   className="btn btn-primary w-100"

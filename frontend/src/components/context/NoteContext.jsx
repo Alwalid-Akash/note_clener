@@ -1,4 +1,9 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState
+} from "react";
 import api from "../../api/api.js";
 import { useAuth } from "./AuthContext.jsx";
 
@@ -9,11 +14,15 @@ export const NoteProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
 
-  // READ (Get all notes)
-  const getNotes = async () => {
+  // GET NOTES + SEARCH
+  const getNotes = async (search = "") => {
     try {
       setLoading(true);
-      const res = await api.get("/notes");
+      const res = await api.get("/notes", {
+        params: {
+          search: search.trim()
+        }
+      });
       setNotes(res.data);
     } catch (err) {
       console.log(err);
@@ -22,36 +31,43 @@ export const NoteProvider = ({ children }) => {
     }
   };
 
-  // CREATE (Add a note)
+  // CREATE NOTE
   const createNote = async (data) => {
     try {
       const res = await api.post("/notes", data);
-      setNotes([...notes, res.data]);
+      setNotes((prevNotes) => [res.data, ...prevNotes]);
     } catch (err) {
       console.log(err);
     }
   };
 
-  // UPDATE (Edit a note)
+  // UPDATE NOTE
   const updateNote = async (id, data) => {
     try {
       const res = await api.put(`/notes/${id}`, data);
-      setNotes(notes.map(n => n._id === id ? res.data : n));
+      setNotes((prevNotes) =>
+        prevNotes.map((note) =>
+          note._id === id ? res.data : note
+        )
+      );
     } catch (err) {
       console.log(err);
     }
   };
 
-  // DELETE (Remove a note)
+  // DELETE NOTE
   const deleteNote = async (id) => {
     try {
       await api.delete(`/notes/${id}`);
-      setNotes(notes.filter(n => n._id !== id));
+      setNotes((prevNotes) =>
+        prevNotes.filter((note) => note._id !== id)
+      );
     } catch (err) {
       console.log(err);
     }
   };
 
+  // GET NOTES AFTER LOGIN
   useEffect(() => {
     if (user) {
       getNotes();
@@ -66,10 +82,10 @@ export const NoteProvider = ({ children }) => {
       value={{
         notes,
         loading,
-        getNotes,      // Changed from fetchNotes
+        getNotes,
         createNote,
         updateNote,
-        deleteNote,
+        deleteNote
       }}
     >
       {children}
