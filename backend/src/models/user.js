@@ -7,17 +7,21 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-
     email: {
       type: String,
       required: true,
       unique: true,
       lowercase: true,
     },
-
     password: {
       type: String,
       required: true,
+    },
+    resetPasswordToken: {
+      type: String,
+    },
+    resetPasswordExpires: {
+      type: Date,
     },
   },
   {
@@ -25,4 +29,5 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("User", userSchema);
+// THIS IS THE FIX - Check if model exists before creating
+module.exports = mongoose.models.User || mongoose.model("User", userSchema);

@@ -6,6 +6,9 @@ const cors = require("cors");
 
 const authRoutes = require("./routes/authRoutes");
 const noteRoutes = require("./routes/noteRoutes");
+const passwordRoutes =
+  require("./routes/passwordRoutes");
+
 
 //const errorHandler = require("./middleware/errorMiddleware.js");
 
@@ -35,6 +38,7 @@ app.use("/api/auth", authRoutes);
 
 app.use("/api/notes", noteRoutes);
 
+app.use("/api/password", passwordRoutes);
 
 // Error middleware
 
