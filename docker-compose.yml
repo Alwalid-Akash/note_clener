@@ -1,0 +1,45 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: note-cleaner-backend
+    restart: always
+    ports:
+      - "5002:5002"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - PORT=5002
+      - FRONTEND_URL=http://frontend
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+    networks:
+      - note-cleaner-network
+    healthcheck:
+      test: [ "CMD", "node", "-e", "require('http').get('http://localhost:5002/health', res => process.exit(res.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: note-cleaner-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - note-cleaner-network
+    environment:
+      - VITE_API_URL=http://backend:5002
+
+networks:
+  note-cleaner-network:
+    driver: bridge
