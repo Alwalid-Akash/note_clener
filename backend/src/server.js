@@ -16,10 +16,11 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "https://note-clener.vercel.app",
+  "https://note-clener-git-main-alwalidtuc-4349s-projects.vercel.app",
   "http://localhost",
   "http://localhost:80",
   "http://127.0.0.1",
-  process.env.FRONTEND_URL // Optional: set in .env for Docker
+  process.env.FRONTEND_URL
 ].filter(Boolean);
 
 app.use(cors({
