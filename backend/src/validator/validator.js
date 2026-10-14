@@ -9,4 +9,4 @@ exports.noteSchema = Joi.object({
   description: Joi.string()
     .required()
 
-});
+}); console.log("hi")
