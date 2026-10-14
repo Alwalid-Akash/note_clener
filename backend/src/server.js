@@ -7,7 +7,7 @@ const connectDB = require("./config/db.js");
 const authRoutes = require("./routes/authRoutes");
 const noteRoutes = require("./routes/noteRoutes");
 const passwordRoutes = require("./routes/passwordRoutes");
-
+const aiRoutes = require("./routes/aiRoutes");
 // const errorHandler = require("./middleware/errorMiddleware.js");
 
 const app = express();
@@ -49,7 +49,7 @@ connectDB();
 app.use("/api/auth", authRoutes);
 app.use("/api/notes", noteRoutes);
 app.use("/api/password", passwordRoutes);
-
+app.use("/api/ai", aiRoutes);
 // Health check
 app.get("/health", (req, res) => {
   res.status(200).json({

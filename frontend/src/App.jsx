@@ -8,6 +8,7 @@ import Navbar from "./components/navbar/Navbar.jsx";
 import ForgotPassword from "./components/pages/ForgotPassword.jsx";
 import ResetPassword from "./components/pages/ResetPassword.jsx";
 
+
 function App() {
   return (
     <BrowserRouter>
