@@ -7,8 +7,6 @@ const api = axios.create({
   },
 });
 
-
-// Add JWT token automatically to every request
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -19,32 +17,7 @@ api.interceptors.request.use(
 
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
-
-
-// Handle unauthorized requests
-api.interceptors.response.use(
-  (response) => response,
-
-  (error) => {
-
-    if (error.response?.status === 401) {
-
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-
-      // Don't redirect repeatedly if already on login
-      if (window.location.pathname !== "/login") {
-        window.location.href = "/login";
-      }
-    }
-
-    return Promise.reject(error);
-  }
-);
-
 
 export default api;
