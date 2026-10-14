@@ -4,7 +4,7 @@ A full-stack Notes Application built with **React, Node.js, Express, and MongoDB
 
 The application allows users to register and log in securely, create personal notes, edit and delete notes, and manage their notes through a responsive web interface.
 
-This project was built to practice real-world full-stack development concepts including **REST APIs, CRUD operations, JWT authentication, password hashing, protected routes, middleware, validation, centralized error handling, and frontend-backend integration**.
+This project was built to practice real-world full-stack development concepts including **REST APIs, CRUD operations, JWT authentication, password hashing, protected routes, middleware, validation, centralized error handling, and frontend-backend integration, Gemini Api**.
 
 ---
 
@@ -30,6 +30,7 @@ https://note-clener1.onrender.com
 * 📱 Responsive UI with Bootstrap 5
 * ⚡ Axios API integration
 * 🌐 RESTful API
+* ☁️ Gemini API to generate context-aware suggestions
 * ☁️ Deployed frontend and backend
 
 ## 🛠️ Tech Stack
