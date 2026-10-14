@@ -13,19 +13,22 @@ const improveNote = async (req, res) => {
 
     if (typeof text !== "string" || !text.trim()) {
       return res.status(400).json({
-        message: "Text is required",
+        success: false,
+        message: "Please enter some text.",
       });
     }
 
     if (text.length > 5000) {
       return res.status(400).json({
-        message: "Text must be under 5000 characters",
+        success: false,
+        message: "Maximum 5000 characters allowed.",
       });
     }
 
     if (!validActions.includes(action)) {
       return res.status(400).json({
-        message: "Invalid AI action",
+        success: false,
+        message: "Invalid writing action.",
       });
     }
 
@@ -35,21 +38,22 @@ const improveNote = async (req, res) => {
     );
 
     return res.status(200).json({
+      success: true,
       original: text,
       suggestion,
       action,
     });
-
   } catch (error) {
-    console.error("AI error:", error.message);
+    console.error("AI service error:", error);
 
     const status = error.status === 429 ? 429 : 502;
 
     return res.status(status).json({
+      success: false,
       message:
         status === 429
-          ? "AI usage limit reached. Please try again later."
-          : "AI service is unavailable. Please try again.",
+          ? "AI usage limit reached. Try again later."
+          : "AI service failed. Check backend logs.",
     });
   }
 };
